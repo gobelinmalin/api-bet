@@ -7,7 +7,7 @@ router.post('/', (req, res) => {
 
   const data = req.body;
 
-  connection.query('INSERT INTO bidder SET ?', data, (err, results) => {
+  connection.query('INSERT INTO friend SET ?', data, (err, results) => {
     if(err) {
       res.sendStatus(err)
     } else {
@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 
 // récupération de liste
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM bidder', (err, results) => {
+  connection.query('SELECT * FROM friend', (err, results) => {
     if(err) {
       res.sendStatus(500)
     } else {
@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 // récupération d"une donnée
 router.get('/:id', (req, res) => {
   const idParams = req.params.id;
-  connection.query('SELECT * FROM bidder WHERE id = ?', idParams, (err, results) => {
+  connection.query('SELECT * FROM friend WHERE id = ?', idParams, (err, results) => {
     if(err) {
       res.sendStatus(err)
     } else {
@@ -45,7 +45,7 @@ router.put('/:id', (req, res) => {
   const idParams = req.params.id;
   const data = req.body;
 
-  connection.query('UPDATE bidder SET ? WHERE id = ?', [data, idParams], (err, results) => {
+  connection.query('UPDATE friend SET ? WHERE id = ?', [data, idParams], (err, results) => {
     if(err) {
       res.sendStatus(err)
     } else {
@@ -59,7 +59,7 @@ router.delete('/:id', (req, res) => {
 
   const idParams = req.params.id;
 
-  connection.query('DELETE FROM bidder WHERE id = ?', idParams, (err, results) => {
+  connection.query('DELETE FROM friend WHERE id = ?', idParams, (err, results) => {
     if(err) {
       res.sendStatus(err)
     } else {
@@ -67,6 +67,7 @@ router.delete('/:id', (req, res) => {
     }
   })
 })
+
 
 
 module.exports = router; 

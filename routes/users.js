@@ -81,11 +81,24 @@ router.get('/:idUser/bets', (req, res) => {
   })
 })
 
-// recupération recupération des pari d'un parieur
+// recupération des pari d'un parieur
 router.get('/:idUser/challenges', (req, res) => {
   const idUser = req.params.idUser;
 
   connection.query('SELECT * FROM bet as b JOIN user as u ON u.id = b.id_user WHERE b.id_challenger = ?', idUser, (err, results) => {
+    if(err) {
+      res.sendStatus(500)
+    } else {
+      res.json(results)
+    }
+  })
+})
+
+// recupération recupération des pari d'un parieur
+router.get('/:id/friends', (req, res) => {
+  const id = req.params.id;
+
+  connection.query('SELECT u.id as is_user, f.id_friend FROM user as u JOIN friend as f ON u.id = f.id_user WHERE (u.id = ?)OR (f.id_friend = ?)', [id, id], (err, results) => {
     if(err) {
       res.sendStatus(500)
     } else {
