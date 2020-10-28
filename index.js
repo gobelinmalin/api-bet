@@ -4,11 +4,7 @@ const port = process.env.PORT || 3000;
 const cors = require("cors");
 const routes = require("./routes");
 
-const corsOptions = {
-  origin: "http://localhost:3000",
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 const swaggerUi = require("swagger-ui-express");
 swaggerDocument = require("./swagger.ts");
