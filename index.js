@@ -1,28 +1,28 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
-const dotenv = require('dotenv');
-const cors = require('cors');
-const routes = require('./routes');
+const cors = require("cors");
+const routes = require("./routes");
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
 
-const swaggerUi = require('swagger-ui-express');
-swaggerDocument = require('./swagger.ts');
+app.use(cors(corsOptions));
+
+const swaggerUi = require("swagger-ui-express");
+swaggerDocument = require("./swagger.ts");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/api', routes);
+app.use("/api", routes);
 
-
-app.listen(port, (err) => {
-  if(err) {
-    console.log(err)
+app.listen(port, err => {
+  if (err) {
+    console.log(err);
   }
-  console.log('Super :)')
-})
-
-
+  console.log("Super :)");
+});

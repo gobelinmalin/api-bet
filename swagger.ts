@@ -620,7 +620,7 @@ const swaggerDocument = {
         }
       }
     },
-    '/friends': {
+    '/friends': {    
       get: {
         description: 'Returns all friends',
         produces: ['application/json'],
