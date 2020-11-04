@@ -82,7 +82,7 @@ router.get("/:idUser/bets", (req, res) => {
   const idUser = req.params.idUser;
 
   connection.query(
-    "SELECT b.id as id_bet, b.title, b.description, b.date_begin,  b.date_end, b.id_user as id_user, b.id_challenger as id_challenger, b.stake, b.proposition, b.status, b.status_end, u.lastname, u.firstname, u.nickame, u.money FROM bet as b JOIN user as u ON u.id = b.id_user WHERE b.id_user = ?",
+    "SELECT b.id as id_bet, b.title, b.description, b.date_begin,  b.date_end, b.id_user as id_user, b.id_challenger as id_challenger, b.stake, b.proposition, b.status, b.status_end, u.lastname, u.firstname, u.nickname, u.money FROM bet as b JOIN user as u ON u.id = b.id_user WHERE b.id_user = ?",
     idUser,
     (err, results) => {
       if (err) {
