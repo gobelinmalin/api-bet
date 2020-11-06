@@ -116,7 +116,7 @@ router.get("/:id/friends", (req, res) => {
   const id = req.params.id;
 
   connection.query(
-    "SELECT u.id as id_user, f.id_friend FROM user as u JOIN friend as f ON u.id = f.id_user WHERE (u.id = ?)OR (f.id_friend = ?)",
+    "SELECT u.id as id_user, f.id_friend, f.id as id FROM user as u JOIN friend as f ON u.id = f.id_user WHERE (u.id = ?)OR (f.id_friend = ?)",
     [id, id],
     (err, results) => {
       if (err) {
