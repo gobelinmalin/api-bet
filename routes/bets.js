@@ -72,7 +72,7 @@ router.delete('/:id', (req, res) => {
 router.get('/:id/players', (req, res) => {
   const id = req.params.id;
 
-  connection.query('SELECT be.id_user, be.id_challenger, bi.id_user as id_player, bi.price, bi.side, bi.id FROM bet as be JOIN bidder as bi ON bi.id_bet = be.id WHERE bi.id_bet', id, (err, results) => {
+  connection.query('SELECT be.id_user, be.id_challenger, bi.id_user as id_player, bi.price, bi.side, bi.id FROM bet as be JOIN bidder as bi ON bi.id_bet = be.id WHERE bi.id_bet = ?', id, (err, results) => {
     if(err) {
       res.sendStatus(500)
     } else {
