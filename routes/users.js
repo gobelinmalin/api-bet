@@ -9,9 +9,20 @@ router.post("/", (req, res) => {
   connection.query("INSERT INTO user SET ?", data, (err, results) => {
     if (err) {
       res.sendStatus(err);
-    } else {
-      res.sendStatus(200);
     }
+    connection.query(
+      "SELECT * FROM user WHERE id = ?",
+      results.insertId,
+      (err2, records) => {
+        if (err2) {
+          return res.sendStatus(500);
+        }
+        const insertedEntity = records[0];
+        const host = req.get("localhost");
+        const location = `https://${host}${req.url}/${insertedEntity.id}`;
+        res.status(201).set("Location", location).json(insertedEntity);
+      }
+    );
   });
 });
 
